@@ -16,8 +16,8 @@ import (
 	"github.com/newrelic/go-agent/v3/integrations/nrpgx5"
 	"github.com/rs/zerolog"
 
-	"github.com/Uthred09/tasker/internal/config"
-	loggerConfig "github.com/Uthred09/tasker/internal/logger"
+	"github.com/uthred09/tasker/internal/config"
+	loggerConfig "github.com/uthred09/tasker/internal/logger"
 )
 
 // Database wraps a PostgreSQL connection pool.

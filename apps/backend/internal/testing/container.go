@@ -6,14 +6,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Uthred09/tasker/internal/config"
-	"github.com/Uthred09/tasker/internal/database"
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/require"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
+	"github.com/uthred09/tasker/internal/config"
+	"github.com/uthred09/tasker/internal/database"
 )
 
 type TestDB struct {

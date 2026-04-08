@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Uthred09/tasker/internal/middleware"
-	"github.com/Uthred09/tasker/internal/server"
+	"github.com/uthred09/tasker/internal/middleware"
+	"github.com/uthred09/tasker/internal/server"
 
 	"github.com/labstack/echo/v4"
 )

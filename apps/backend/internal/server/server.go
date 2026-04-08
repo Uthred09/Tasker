@@ -7,13 +7,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Uthred09/tasker/internal/config"
-	"github.com/Uthred09/tasker/internal/database"
-	"github.com/Uthred09/tasker/internal/lib/job"
-	loggerPkg "github.com/Uthred09/tasker/internal/logger"
 	"github.com/newrelic/go-agent/v3/integrations/nrredis-v9"
 	"github.com/redis/go-redis/v9"
 	"github.com/rs/zerolog"
+	"github.com/uthred09/tasker/internal/config"
+	"github.com/uthred09/tasker/internal/database"
+	"github.com/uthred09/tasker/internal/lib/job"
+	loggerPkg "github.com/uthred09/tasker/internal/logger"
 )
 
 type Server struct {
@@ -35,6 +35,8 @@ func New(cfg *config.Config, logger *zerolog.Logger, loggerService *loggerPkg.Lo
 	// Redis client with New Relic integration
 	redisClient := redis.NewClient(&redis.Options{
 		Addr: cfg.Redis.Address,
+		Password: cfg.Redis.Password,
+		DB:       0,
 	})
 
 	// Add New Relic Redis hooks if available

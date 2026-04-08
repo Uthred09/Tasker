@@ -3,10 +3,10 @@ package testing
 import (
 	"time"
 
-	"github.com/Uthred09/tasker/internal/config"
-	"github.com/Uthred09/tasker/internal/database"
-	"github.com/Uthred09/tasker/internal/server"
 	"github.com/rs/zerolog"
+	"github.com/uthred09/tasker/internal/config"
+	"github.com/uthred09/tasker/internal/database"
+	"github.com/uthred09/tasker/internal/server"
 )
 
 // CreateTestServer creates a server instance for testing

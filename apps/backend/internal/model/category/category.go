@@ -1,6 +1,6 @@
 package category
 
-import "github.com/Uthred09/tasker/internal/model"
+import "github.com/uthred09/tasker/internal/model"
 
 type Category struct {
 	model.Base

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Uthred09/tasker/internal/server"
+	"github.com/uthred09/tasker/internal/server"
 
 	"github.com/labstack/echo/v4"
 )

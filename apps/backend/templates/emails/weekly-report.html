@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="en">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta name="x-apple-disable-message-reformatting" />
+  </head>
+  <body style="margin:0;padding:0;background-color:#F4F4F5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif">
+
+    <!-- Preview text -->
+    <div style="display:none;overflow:hidden;line-height:1px;opacity:0;max-height:0;max-width:0">
+      Your Weekly Productivity Report · {{.WeekStart}} – {{.WeekEnd}}
+    </div>
+
+    <!-- Outer wrapper -->
+    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#F4F4F5;padding:40px 16px">
+      <tbody>
+        <tr>
+          <td align="center">
+
+            <!-- Card -->
+            <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="max-width:600px;background-color:#FFFFFF;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04)">
+              <tbody>
+                <tr>
+                  <td>
+
+                    <!-- Top accent bar -->
+                    <div style="height:3px;background:linear-gradient(90deg,#4F46E5 0%,#7C3AED 50%,#A855F7 100%)"></div>
+
+                    <!-- Header -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding:40px 40px 32px 40px">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                              <tbody>
+                                <tr>
+                                  <td style="vertical-align:middle">
+                                    <img
+                                      alt="Tasker"
+                                      height="32"
+                                      width="32"
+                                      src="http://localhost:8080/static/full_logo.png"
+                                      style="display:block;outline:none;border:none;text-decoration:none;border-radius:6px" />
+                                  </td>
+                                  <td style="vertical-align:middle;padding-left:10px">
+                                    <span style="font-size:15px;font-weight:600;color:#09090B;letter-spacing:-0.01em">Tasker</span>
+                                  </td>
+                                  <td align="right" style="vertical-align:middle">
+                                    <span style="font-size:12px;color:#A1A1AA;font-weight:500;letter-spacing:0.02em;text-transform:uppercase">Weekly Report</span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding-top:28px">
+                            <p style="margin:0;font-size:24px;font-weight:700;color:#09090B;letter-spacing:-0.03em;line-height:1.2">Your week in review</p>
+                            <p style="margin:6px 0 0 0;font-size:14px;color:#71717A;font-weight:400">{{.WeekStart}} &ndash; {{.WeekEnd}}</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <!-- Divider -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding:0 40px">
+                      <tbody><tr><td style="border-top:1px solid #F4F4F5;font-size:0;line-height:0">&nbsp;</td></tr></tbody>
+                    </table>
+
+                    <!-- Stats: 4 columns -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding:32px 40px">
+                      <tbody>
+                        <tr>
+                          <!-- Created -->
+                          <td align="center" width="25%" style="padding:0 8px 0 0;border-right:1px solid #F4F4F5">
+                            <p style="margin:0;font-size:28px;font-weight:700;color:#6366F1;letter-spacing:-0.04em;line-height:1">{{.CreatedCount}}</p>
+                            <p style="margin:5px 0 0 0;font-size:11px;font-weight:500;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.06em">Created</p>
+                          </td>
+                          <!-- Completed -->
+                          <td align="center" width="25%" style="padding:0 8px;border-right:1px solid #F4F4F5">
+                            <p style="margin:0;font-size:28px;font-weight:700;color:#059669;letter-spacing:-0.04em;line-height:1">{{.CompletedCount}}</p>
+                            <p style="margin:5px 0 0 0;font-size:11px;font-weight:500;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.06em">Completed</p>
+                          </td>
+                          <!-- Active -->
+                          <td align="center" width="25%" style="padding:0 8px;border-right:1px solid #F4F4F5">
+                            <p style="margin:0;font-size:28px;font-weight:700;color:#0284C7;letter-spacing:-0.04em;line-height:1">{{.ActiveCount}}</p>
+                            <p style="margin:5px 0 0 0;font-size:11px;font-weight:500;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.06em">Active</p>
+                          </td>
+                          <!-- Overdue -->
+                          <td align="center" width="25%" style="padding:0 0 0 8px">
+                            <p style="margin:0;font-size:28px;font-weight:700;color:#DC2626;letter-spacing:-0.04em;line-height:1">{{.OverdueCount}}</p>
+                            <p style="margin:5px 0 0 0;font-size:11px;font-weight:500;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.06em">Overdue</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <!-- Divider -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding:0 40px">
+                      <tbody><tr><td style="border-top:1px solid #F4F4F5;font-size:0;line-height:0">&nbsp;</td></tr></tbody>
+                    </table>
+
+                    <!-- Completed Todos -->
+                    {{if .CompletedTodos}}
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding:32px 40px 0 40px">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <p style="margin:0 0 16px 0;font-size:12px;font-weight:600;color:#09090B;text-transform:uppercase;letter-spacing:0.08em">Completed this week</p>
+                            {{range .CompletedTodos}}
+                            <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin-bottom:8px">
+                              <tbody>
+                                <tr>
+                                  <td width="20" style="vertical-align:top;padding-top:1px">
+                                    <div style="width:16px;height:16px;border-radius:50%;background-color:#059669;text-align:center;line-height:16px">
+                                      <span style="color:#FFFFFF;font-size:9px;font-weight:700">&#10003;</span>
+                                    </div>
+                                  </td>
+                                  <td style="vertical-align:top;padding-left:10px">
+                                    <p style="margin:0;font-size:14px;color:#3F3F46;font-weight:400;line-height:1.4;text-decoration:line-through">{{.Title}}</p>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            {{end}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    {{end}}
+
+                    <!-- Overdue Todos -->
+                    {{if .OverdueTodos}}
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding:28px 40px 0 40px">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <p style="margin:0 0 16px 0;font-size:12px;font-weight:600;color:#09090B;text-transform:uppercase;letter-spacing:0.08em">Needs attention</p>
+                            {{range .OverdueTodos}}
+                            <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin-bottom:8px;background-color:#FFF7F7;border-radius:6px;border-left:3px solid #DC2626">
+                              <tbody>
+                                <tr>
+                                  <td style="padding:10px 14px">
+                                    <p style="margin:0;font-size:14px;color:#3F3F46;font-weight:500;line-height:1.4">{{.Title}}</p>
+                                    {{if .DueDate}}<p style="margin:3px 0 0 0;font-size:12px;color:#DC2626;font-weight:400">Due {{.DueDate}}</p>{{end}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            {{end}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    {{end}}
+
+                    <!-- CTA -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding:36px 40px">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <a href="/dashboard"
+                              target="_blank"
+                              style="display:inline-block;background-color:#09090B;color:#FAFAFA;font-size:14px;font-weight:500;text-decoration:none;border-radius:7px;padding:11px 24px;letter-spacing:-0.01em">
+                              View Dashboard &rarr;
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <!-- Divider -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding:0 40px">
+                      <tbody><tr><td style="border-top:1px solid #F4F4F5;font-size:0;line-height:0">&nbsp;</td></tr></tbody>
+                    </table>
+
+                    <!-- Tip -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding:24px 40px">
+                      <tbody>
+                        <tr>
+                          <td style="background-color:#FAFAFA;border-radius:8px;padding:16px 20px">
+                            <p style="margin:0 0 4px 0;font-size:12px;font-weight:600;color:#09090B;letter-spacing:0.01em">This week&#x27;s tip</p>
+                            <p style="margin:0;font-size:13px;color:#71717A;line-height:1.6">Identify your 3 most important tasks each morning and protect time for them before reactive work takes over.</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <!-- Footer -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding:0 40px 36px 40px">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <p style="margin:0;font-size:12px;color:#A1A1AA;line-height:1.6">
+                              You&#x27;re receiving this because weekly reports are enabled.
+                              <a href="/settings/notifications" target="_blank" style="color:#6366F1;text-decoration:none;font-weight:500">Manage preferences</a>
+                              &nbsp;&middot;&nbsp;
+                              <a href="/dashboard" target="_blank" style="color:#6366F1;text-decoration:none;font-weight:500">Open Tasker</a>
+                            </p>
+                            <p style="margin:12px 0 0 0;font-size:11px;color:#D4D4D8">&copy; 2025 Tasker. All rights reserved.</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /Card -->
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </body>
+</html>

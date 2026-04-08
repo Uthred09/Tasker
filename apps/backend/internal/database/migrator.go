@@ -14,7 +14,7 @@ import (
 	tern "github.com/jackc/tern/v2/migrate"
 	"github.com/rs/zerolog"
 
-	"github.com/Uthred09/tasker/internal/config"
+	"github.com/uthred09/tasker/internal/config"
 )
 
 //go:embed migrations/*.sql

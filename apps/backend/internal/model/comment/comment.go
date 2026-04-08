@@ -1,8 +1,8 @@
 package comment
 
 import (
-	"github.com/Uthred09/tasker/internal/model"
 	"github.com/google/uuid"
+	"github.com/uthred09/tasker/internal/model"
 )
 
 type Comment struct {

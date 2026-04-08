@@ -3,12 +3,12 @@ package handler
 import (
 	"time"
 
-	"github.com/Uthred09/tasker/internal/middleware"
-	"github.com/Uthred09/tasker/internal/server"
-	"github.com/Uthred09/tasker/internal/validation"
 	"github.com/labstack/echo/v4"
 	"github.com/newrelic/go-agent/v3/integrations/nrpkgerrors"
 	"github.com/newrelic/go-agent/v3/newrelic"
+	"github.com/uthred09/tasker/internal/middleware"
+	"github.com/uthred09/tasker/internal/server"
+	"github.com/uthred09/tasker/internal/validation"
 )
 
 // Handler provides base functionality for all handlers

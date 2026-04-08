@@ -3,10 +3,10 @@ package todo
 import (
 	"time"
 
-	"github.com/Uthred09/tasker/internal/model"
-	"github.com/Uthred09/tasker/internal/model/category"
-	"github.com/Uthred09/tasker/internal/model/comment"
 	"github.com/google/uuid"
+	"github.com/uthred09/tasker/internal/model"
+	"github.com/uthred09/tasker/internal/model/category"
+	"github.com/uthred09/tasker/internal/model/comment"
 )
 
 type Status string

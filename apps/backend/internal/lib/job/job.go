@@ -1,15 +1,25 @@
 package job
 
 import (
-	"github.com/Uthred09/tasker/internal/config"
+	"context"
+
+
 	"github.com/hibiken/asynq"
 	"github.com/rs/zerolog"
+	"github.com/uthred09/tasker/internal/config"
+	"github.com/uthred09/tasker/internal/lib/email"
 )
 
 type JobService struct {
 	Client *asynq.Client
 	server *asynq.Server
 	logger *zerolog.Logger
+	authService AuthServiceInterface
+	emailClient *email.Client
+}
+
+type AuthServiceInterface interface {
+	GetUserEmail(ctx context.Context, userID string) (string, error)
 }
 
 func NewJobService(logger *zerolog.Logger, cfg *config.Config) *JobService {
@@ -17,6 +27,8 @@ func NewJobService(logger *zerolog.Logger, cfg *config.Config) *JobService {
 
 	client := asynq.NewClient(asynq.RedisClientOpt{
 		Addr: redisAddr,
+		Password: cfg.Redis.Password,
+		DB:       0,
 	})
 
 	server := asynq.NewServer(
@@ -38,10 +50,16 @@ func NewJobService(logger *zerolog.Logger, cfg *config.Config) *JobService {
 	}
 }
 
+func (j *JobService) SetAuthService(authService AuthServiceInterface) {
+	j.authService = authService
+}
+
 func (j *JobService) Start() error {
 	// Register task handlers
 	mux := asynq.NewServeMux()
 	mux.HandleFunc(TaskWelcome, j.handleWelcomeEmailTask) //calls the handler
+	mux.HandleFunc(TaskReminderEmail, j.handleReminderEmailTask)
+	mux.HandleFunc(TaskWeeklyReportEmail, j.handleWeeklyReportEmailTask)
 
 	j.logger.Info().Msg("Starting background job server")
 	if err := j.server.Start(mux); err != nil {

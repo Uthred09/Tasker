@@ -3,12 +3,13 @@ package router
 import (
 	"net/http"
 
-	"github.com/Uthred09/tasker/internal/handler"
-	"github.com/Uthred09/tasker/internal/middleware"
-	"github.com/Uthred09/tasker/internal/server"
-	"github.com/Uthred09/tasker/internal/service"
 	"github.com/labstack/echo/v4"
 	echoMiddleware "github.com/labstack/echo/v4/middleware"
+	"github.com/uthred09/tasker/internal/handler"
+	"github.com/uthred09/tasker/internal/middleware"
+	v1 "github.com/uthred09/tasker/internal/router/v1"
+	"github.com/uthred09/tasker/internal/server"
+	"github.com/uthred09/tasker/internal/service"
 	"golang.org/x/time/rate"
 )
 
@@ -54,7 +55,9 @@ func NewRouter(s *server.Server, h *handler.Handlers, services *service.Services
 	registerSystemRoutes(router, h)
 
 	// register versioned routes
-	router.Group("/api/v1")
+	v1Router := router.Group("/api/v1")
+
+	v1.RegisterV1Routes(v1Router, h, middlewares)
 
 	return router
 }

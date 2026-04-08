@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"html/template"
 
-	"github.com/Uthred09/tasker/internal/config"
 	"github.com/pkg/errors"
 	"github.com/resend/resend-go/v2"
 	"github.com/rs/zerolog"
+	"github.com/uthred09/tasker/internal/config"
 )
 
 type Client struct {
@@ -23,7 +23,7 @@ func NewClient(cfg *config.Config, logger *zerolog.Logger) *Client {
 	}
 }
 
-func (c *Client) SendEmail(to, subject string, templateName Template, data map[string]string) error {
+func (c *Client) SendEmail(to, subject string, templateName Template, data map[string]any) error {
 	tmplPath := fmt.Sprintf("%s/%s.html", "templates/emails", templateName)
 
 	tmpl, err := template.ParseFiles(tmplPath)

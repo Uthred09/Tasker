@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/Uthred09/tasker/internal/server"
+	"github.com/uthred09/tasker/internal/server"
 )
 
 type RateLimitMiddleware struct {

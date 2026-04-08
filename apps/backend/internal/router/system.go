@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/Uthred09/tasker/internal/handler"
+	"github.com/uthred09/tasker/internal/handler"
 
 	"github.com/labstack/echo/v4"
 )

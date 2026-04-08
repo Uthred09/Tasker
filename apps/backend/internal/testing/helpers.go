@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/Uthred09/tasker/internal/server"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/require"
+	"github.com/uthred09/tasker/internal/server"
 )
 
 // SetupTest prepares a test environment with a database and server

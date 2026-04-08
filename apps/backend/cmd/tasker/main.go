@@ -8,14 +8,14 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/Uthred09/tasker/internal/config"
-	"github.com/Uthred09/tasker/internal/database"
-	"github.com/Uthred09/tasker/internal/handler"
-	"github.com/Uthred09/tasker/internal/logger"
-	"github.com/Uthred09/tasker/internal/repository"
-	"github.com/Uthred09/tasker/internal/router"
-	"github.com/Uthred09/tasker/internal/server"
-	"github.com/Uthred09/tasker/internal/service"
+	"github.com/uthred09/tasker/internal/config"
+	"github.com/uthred09/tasker/internal/database"
+	"github.com/uthred09/tasker/internal/handler"
+	"github.com/uthred09/tasker/internal/logger"
+	"github.com/uthred09/tasker/internal/repository"
+	"github.com/uthred09/tasker/internal/router"
+	"github.com/uthred09/tasker/internal/server"
+	"github.com/uthred09/tasker/internal/service"
 )
 
 const DefaultContextTimeout = 30
@@ -32,10 +32,9 @@ func main() {
 
 	log := logger.NewLoggerWithService(cfg.Observability, loggerService)
 
-	if cfg.Primary.Env != "local" {
-		if err := database.Migrate(context.Background(), &log, cfg); err != nil {
-			log.Fatal().Err(err).Msg("failed to migrate database")
-		}
+	// Initialize database
+	if err := database.Migrate(context.Background(), &log, cfg); err != nil {
+		log.Fatal().Err(err).Msg("failed to migrate database")
 	}
 
 	// Initialize server
