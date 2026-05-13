@@ -9,7 +9,7 @@ import (
 func registerTodoRoutes(r *echo.Group, h *handler.TodoHandler, ch *handler.CommentHandler, auth *middleware.AuthMiddleware) {
 	// Todo operations
 	todos := r.Group("/todos")
-	todos.Use(auth.RequireAuth)
+	todos.Use(auth.RequireAuth) //middlewares which runs on every route inside the /todos group before handler is called.
 
 	// Collection operations
 	todos.POST("", h.CreateTodo)
@@ -33,3 +33,4 @@ func registerTodoRoutes(r *echo.Group, h *handler.TodoHandler, ch *handler.Comme
 	todoAttachments.DELETE("/:attachmentId", h.DeleteTodoAttachment)
 	todoAttachments.GET("/:attachmentId/download", h.GetAttachmentPresignedURL)
 }
+

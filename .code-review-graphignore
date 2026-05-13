@@ -1,0 +1,38 @@
+# Dependencies - ALL node_modules anywhere in the tree
+**/node_modules/**
+node_modules/
+
+# Lock files
+bun.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+go.sum
+
+# Generated / build output
+**/dist/**
+**/build/**
+**/.next/**
+**/.vite/**
+*.gen.go
+apps/backend/static/openapi.json
+packages/openapi/openapi.json
+
+# Binaries and large assets
+*.exe
+*.dll
+*.node
+*.wasm
+*.pack
+*.pack.gz
+*.map
+*.bin
+
+# Database & logs
+*.db
+*.sqlite
+*.log
+*.tmp
+
+# Git internals
+.git/

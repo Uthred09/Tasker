@@ -66,7 +66,8 @@ func New(cfg *config.Config, logger *zerolog.Logger, loggerService *loggerConfig
 		cfg.Database.SSLMode,
 	)
 
-	pgxPoolConfig, err := pgxpool.ParseConfig(dsn)
+	//parse dsn string to structure config object that pgxpool understands, a setup between building dsn and creating pool.
+	pgxPoolConfig, err := pgxpool.ParseConfig(dsn) 
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse pgx pool config: %w", err)
 	}

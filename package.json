@@ -1,9 +1,9 @@
 {
-  "name": "boilerplate",
+  "name": "tasker",
   "version": "1.0.0",
   "scripts": {
     "build": "turbo run build",
-    "dev": "docker compose -f apps/backend/docker-compose.yml up -d && turbo run dev",
+    "dev": "docker compose -f docker-compose.yml up -d && turbo run dev",
     "format:check": "turbo run format:check",
     "format:fix": "turbo run format:fix",
     "lint": "turbo run lint",

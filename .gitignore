@@ -61,5 +61,9 @@ tsconfig.tsbuildinfo
 .env
 .turbo
 .vscode
+.env.docker
+.env.docker
+go-backend-tasker
 
-go-backend-boilerplate
+# Local learning notes (not for source control)
+docs/production-patterns.md

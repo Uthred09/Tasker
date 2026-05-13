@@ -21,6 +21,7 @@ import (
 var migrations embed.FS
 
 func Migrate(ctx context.Context, logger *zerolog.Logger, cfg *config.Config) error {
+	//Build DSN fron config
 	hostPort := net.JoinHostPort(cfg.Database.Host, strconv.Itoa(cfg.Database.Port))
 	encodedPassword := url.QueryEscape(cfg.Database.Password)
 	dsn := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=%s",
@@ -31,35 +32,43 @@ func Migrate(ctx context.Context, logger *zerolog.Logger, cfg *config.Config) er
 		cfg.Database.SSLMode,
 	)
 
+	//Connect to database with pgx
 	conn, err := pgx.Connect(ctx, dsn)
 	if err != nil {
 		return err
 	}
+	//Defer closing connection
 	defer conn.Close(ctx)
 
+	//create tern migrator - tracks schema_version table
 	m, err := tern.NewMigrator(ctx, conn, "schema_version")
 	if err != nil {
 		return fmt.Errorf("constructing database migrator: %w", err)
 	}
 
+	//Load migrations files from embedded filesystem
 	subtree, err := fs.Sub(migrations, "migrations")
 	if err != nil {
 		return fmt.Errorf("retrieving database migrations: %w", err)
 	}
 
+	//Load migrations
 	if err := m.LoadMigrations(subtree); err != nil {
 		return fmt.Errorf("loading database migrations: %w", err)
 	}
 
+	//Get current migration version from datbase
 	from, err := m.GetCurrentVersion(ctx)
 	if err != nil {
 		return fmt.Errorf("retreving current database migration version: %w", err)
 	}
 
+	//Run migrations
 	if err := m.Migrate(ctx); err != nil {
 		return err
 	}
 
+	//Log results
 	if from == int32(len(m.Migrations)) {
 		logger.Info().Msgf("database schema up to date, version %d", len(m.Migrations))
 	} else {

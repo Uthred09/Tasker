@@ -32,17 +32,17 @@ func TestTodoRepository_CreateTodo(t *testing.T) {
 		}
 
 		result, err := todoRepo.CreateTodo(ctx, userID, payload)
-		require.NoError(t, err)
-		require.NotNil(t, result)
+		require.NoError(t, err) //test stops if err is not nil
+		require.NotNil(t, result) //tests stops if result is nil
 
-		assert.NotEqual(t, uuid.Nil, result.ID)
-		assert.Equal(t, userID, result.UserID)
-		assert.Equal(t, payload.Title, result.Title)
+		assert.NotEqual(t, uuid.Nil, result.ID) // asserts not equal
+		assert.Equal(t, userID, result.UserID) // test continues on failure
+		assert.Equal(t, payload.Title, result.Title) 
 		assert.Equal(t, payload.Description, result.Description)
 		assert.Equal(t, *payload.Priority, result.Priority)
 		assert.Equal(t, payload.DueDate.Unix(), result.DueDate.Unix())
 		assert.Equal(t, todo.StatusDraft, result.Status)
-		assert.Nil(t, result.CompletedAt)
+		assert.Nil(t, result.CompletedAt) //asserts value is nil
 		testing_pkg.AssertTimestampsValid(t, result)
 	})
 

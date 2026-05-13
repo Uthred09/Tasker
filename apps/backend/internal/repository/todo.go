@@ -521,6 +521,7 @@ func (r *TodoRepository) GetTodoAttachment(
 		return nil, fmt.Errorf("failed to get todo attachment: %w", err)
 	}
 
+	
 	attachment, err := pgx.CollectOneRow(rows, pgx.RowToStructByName[todo.TodoAttachment])
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {

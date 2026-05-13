@@ -174,6 +174,7 @@ func LoadConfig() (*Config, error) {
 			} else {
 				envVars[configKey] = value
 			}
+
 		}
 	}
 
@@ -185,7 +186,16 @@ func LoadConfig() (*Config, error) {
 	}
 
 	for key, value := range envVars {
-		k.Set(key, value)
+		if strings.Contains(value, ",") {
+			parts := strings.Split(value, ",")
+			trimmed := make([]string, len(parts))
+			for i, p := range parts {
+				trimmed[i] = strings.TrimSpace(p)
+			}
+			k.Set(key, trimmed)
+		} else {
+			k.Set(key, value)
+		}
 	}
 
 	mainConfig := &Config{}

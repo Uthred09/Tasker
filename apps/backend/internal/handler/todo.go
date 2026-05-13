@@ -50,14 +50,15 @@ func (h *TodoHandler) GetTodoByID(c echo.Context) error {
 
 func (h *TodoHandler) GetTodos(c echo.Context) error {
 	return Handle(
-		h.Handler,
-		func(c echo.Context, query *todo.GetTodosQuery) (*model.PaginatedResponse[todo.PopulatedTodo], error) {
+		h.Handler, //arg 1: The base handler
+		//Arg 2: The logic (handlerFunc)
+		func(c echo.Context, query *todo.GetTodosQuery) (*model.PaginatedResponse[todo.PopulatedTodo], error) { 
 			userID := middleware.GetUserID(c)
 			return h.todoService.GetTodos(c, userID, query)
 		},
-		http.StatusOK,
-		&todo.GetTodosQuery{},
-	)(c)
+		http.StatusOK, //arg 3: The http status code
+		&todo.GetTodosQuery{}, //arg 4: The Blueprint(req), empty struct
+	)(c) //The "tirgger"
 }
 
 func (h *TodoHandler) UpdateTodo(c echo.Context) error {

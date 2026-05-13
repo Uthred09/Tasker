@@ -1,7 +1,7 @@
 {
-  "name": "@boilerplate/zod",
+  "name": "@tasker/zod",
   "version": "1.0.0",
-  "description": "Package which exports all Boilerplate zod schemas and types",
+  "description": "Package which exports all tasker zod schemas and types",
   "type": "module",
   "scripts": {
     "build": "tsc && tsc-alias",
@@ -19,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@anatine/zod-openapi": "^2.2.7",
-    "zod": "^3.24.2"
+    "zod": "3.24.4"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",

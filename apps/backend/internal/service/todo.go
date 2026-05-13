@@ -39,7 +39,7 @@ func (s *TodoService) CreateTodo(ctx echo.Context, userID string, payload *todo.
 
 	// Validate parent todo exists and belongs to user (if provided)
 	if payload.ParentTodoID != nil {
-		parentTodo, err := s.todoRepo.CheckTodoExists(ctx.Request().Context(), userID, *payload.ParentTodoID)
+		parentTodo, err := s.todoRepo.CheckTodoExists(ctx.Request().Context(), userID, *payload.ParentTodoID) //ctx.Request().Context() is not a new context. It extracts the standard context.Context from inside echo.Context. 
 		if err != nil {
 			logger.Error().Err(err).Msg("parent todo validation failed")
 			return nil, err
@@ -314,7 +314,7 @@ func (s *TodoService) DeleteTodoAttachment(
 	}
 
 	// Delete from S3 asynchronously
-	go func() {
+	go func() { //go func() is a go routine
 		err := s.awsClient.S3.DeleteObject(
 			ctx.Request().Context(),
 			s.server.Config.AWS.UploadBucket,
