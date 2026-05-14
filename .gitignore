@@ -63,6 +63,7 @@ tsconfig.tsbuildinfo
 .vscode
 .env.docker
 .env.docker
+.env.Local
 go-backend-tasker
 
 # Local learning notes (not for source control)
