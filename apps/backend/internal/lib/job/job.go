@@ -2,13 +2,13 @@ package job
 
 import (
 	"context"
-	"crypto/tls"
 
 
 	"github.com/hibiken/asynq"
 	"github.com/rs/zerolog"
 	"github.com/uthred09/tasker/internal/config"
 	"github.com/uthred09/tasker/internal/lib/email"
+ 	"github.com/uthred09/tasker/internal/lib/utils"
 )
 
 type JobService struct {
@@ -25,16 +25,16 @@ type AuthServiceInterface interface {
 
 func NewJobService(logger *zerolog.Logger, cfg *config.Config) *JobService {
 
-	redisOpt := asynq.RedisClientOpt{
-		Addr: cfg.Redis.Address,
-		Password: cfg.Redis.Password,
-		DB:       0,
-	}
+	// Asynq needs its own opt type — but we read from the same shared options
+	opts := utils.BuildOptions(cfg)
 
-	if cfg.Redis.TLS {
-    redisOpt.TLSConfig = &tls.Config{
-        InsecureSkipVerify: false,
-    }}
+	redisOpt := asynq.RedisClientOpt{
+		Addr:      opts.Addr,
+		Password:  opts.Password,
+		DB:        opts.DB,
+		TLSConfig: opts.TLSConfig,  // nil if TLS=false, set if TLS=true
+	}
+	
 
 	client := asynq.NewClient(redisOpt)
 	server := asynq.NewServer(

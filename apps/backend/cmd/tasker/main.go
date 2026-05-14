@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/signal"
 	"time"
+	"syscall"
 
 	"github.com/uthred09/tasker/internal/config"
 	"github.com/uthred09/tasker/internal/database"
@@ -57,7 +58,7 @@ func main() {
 	// Setup HTTP server
 	srv.SetupHTTPServer(r)
 
-	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 
 	// Start server
 	go func() {

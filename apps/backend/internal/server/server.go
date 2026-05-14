@@ -14,6 +14,7 @@ import (
 	"github.com/uthred09/tasker/internal/database"
 	"github.com/uthred09/tasker/internal/lib/job"
 	loggerPkg "github.com/uthred09/tasker/internal/logger"
+	"github.com/uthred09/tasker/internal/lib/utils"
 )
 
 type Server struct {
@@ -32,12 +33,7 @@ func New(cfg *config.Config, logger *zerolog.Logger, loggerService *loggerPkg.Lo
 		return nil, fmt.Errorf("failed to initialize database: %w", err)
 	}
 
-	// Redis client with New Relic integration
-	redisClient := redis.NewClient(&redis.Options{
-		Addr: cfg.Redis.Address,
-		Password: cfg.Redis.Password,
-		DB:       0,
-	})
+	redisClient := redis.NewClient(utils.BuildOptions(cfg))
 
 	// Add New Relic Redis hooks if available
 	if loggerService != nil && loggerService.GetApplication() != nil {
@@ -112,6 +108,10 @@ func (s *Server) Shutdown(ctx context.Context) error {
 	if s.Job != nil {
 		s.Job.Stop()
 	}
+
+	if err := s.Redis.Close(); err != nil {
+        return fmt.Errorf("failed to close Redis connection: %w", err)
+    }
 
 	return nil
 }
