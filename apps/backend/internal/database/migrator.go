@@ -24,7 +24,7 @@ func Migrate(ctx context.Context, logger *zerolog.Logger, cfg *config.Config) er
 	//Build DSN fron config
 	hostPort := net.JoinHostPort(cfg.Database.Host, strconv.Itoa(cfg.Database.Port))
 	encodedPassword := url.QueryEscape(cfg.Database.Password)
-	dsn := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=%s",
+	dsn := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=%s&statement_cache_mode=describe",
 		cfg.Database.User,
 		encodedPassword,
 		hostPort,
