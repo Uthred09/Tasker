@@ -195,7 +195,15 @@ func LoadConfig() (*Config, error) {
 			}
 			k.Set(key, trimmed)
 		} else {
-			k.Set(key, value)
+			// Handle bool conversion before storing
+			switch strings.ToLower(value) {
+			case "true":
+				k.Set(key, true)
+			case "false":
+				k.Set(key, false)
+			default:
+				k.Set(key, value)
+			}
 		}
 	}
 
