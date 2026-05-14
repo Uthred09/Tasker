@@ -24,19 +24,21 @@ type AuthServiceInterface interface {
 }
 
 func NewJobService(logger *zerolog.Logger, cfg *config.Config) *JobService {
-	redisAddr := cfg.Redis.Address
 
-	client := asynq.NewClient(asynq.RedisClientOpt{
-		Addr: redisAddr,
+	redisOpt := asynq.RedisClientOpt{
+		Addr: cfg.Redis.Address,
 		Password: cfg.Redis.Password,
 		DB:       0,
-		TLSConfig: &tls.Config{
-			InsecureSkipVerify: false,
-		},
-	})
+	}
 
+	if cfg.Redis.TLS {
+    redisOpt.TLSConfig = &tls.Config{
+        InsecureSkipVerify: false,
+    }}
+
+	client := asynq.NewClient(redisOpt)
 	server := asynq.NewServer(
-		asynq.RedisClientOpt{Addr: redisAddr},
+		redisOpt,
 		asynq.Config{
 			Concurrency: 10,
 			Queues: map[string]int{

@@ -50,6 +50,7 @@ type DatabaseConfig struct {
 type RedisConfig struct {
 	Address string `koanf:"address" validate:"required"`
 	Password string `koanf:"password"`
+	TLS	bool   `koanf:"tls"`
 }
 
 type IntegrationConfig struct {
