@@ -2,6 +2,7 @@ package job
 
 import (
 	"context"
+	"crypto/tls"
 
 
 	"github.com/hibiken/asynq"
@@ -29,6 +30,9 @@ func NewJobService(logger *zerolog.Logger, cfg *config.Config) *JobService {
 		Addr: redisAddr,
 		Password: cfg.Redis.Password,
 		DB:       0,
+		TLSConfig: &tls.Config{
+			InsecureSkipVerify: false,
+		},
 	})
 
 	server := asynq.NewServer(
