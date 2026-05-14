@@ -46,11 +46,6 @@ type DatabaseConfig struct {
 	MaxIdleConns    int    `koanf:"max_idle_conns" validate:"required"`
 	ConnMaxLifetime int    `koanf:"conn_max_lifetime" validate:"required"`
 	ConnMaxIdleTime int    `koanf:"conn_max_idle_time" validate:"required"`
-
-	// Direct connection for migrations — bypasses PgBouncer
-    // Uses same user/password/name/sslmode as above
-    DirectHost string `koanf:"direct_host"`
-    DirectPort int    `koanf:"direct_port"`
 }
 type RedisConfig struct {
 	Address string `koanf:"address" validate:"required"`

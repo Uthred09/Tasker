@@ -22,13 +22,7 @@ var migrations embed.FS
 
 func Migrate(ctx context.Context, logger *zerolog.Logger, cfg *config.Config) error {
 	//Build DSN fron config
-	host := cfg.Database.DirectHost
-    port := cfg.Database.DirectPort
-    if host == "" || port == 0 {
-        host = cfg.Database.Host
-        port = cfg.Database.Port
-    }
-	hostPort := net.JoinHostPort(host, strconv.Itoa(port))
+	hostPort := net.JoinHostPort(cfg.Database.Host, strconv.Itoa(cfg.Database.Port))
 	encodedPassword := url.QueryEscape(cfg.Database.Password)
 	dsn := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=%s",
 		cfg.Database.User,
@@ -38,14 +32,8 @@ func Migrate(ctx context.Context, logger *zerolog.Logger, cfg *config.Config) er
 		cfg.Database.SSLMode,
 	)
 
-	// Parse DSN into pgx config so we can customize it further
-    connConfig, err := pgx.ParseConfig(dsn)
-    if err != nil {
-        return fmt.Errorf("parsing database config: %w", err)
-    }
-
 	//Connect to database with pgx
-	conn, err := pgx.ConnectConfig(ctx, connConfig)
+	conn, err := pgx.Connect(ctx, dsn)
 	if err != nil {
 		return err
 	}
