@@ -11,6 +11,7 @@ type Handlers struct {
 	Todo     *TodoHandler
 	Comment  *CommentHandler
 	Category *CategoryHandler
+	Webhook  *WebhookHandler
 }
 
 func NewHandlers(s *server.Server, services *service.Services) *Handlers {
@@ -20,5 +21,6 @@ func NewHandlers(s *server.Server, services *service.Services) *Handlers {
 		Todo:     NewTodoHandler(s, services.Todo),
 		Category: NewCategoryHandler(s, services.Category),
 		Comment:  NewCommentHandler(s, services.Comment),
+		Webhook:  NewWebhookHandler(s),
 	}
 }

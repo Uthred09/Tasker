@@ -60,6 +60,7 @@ type IntegrationConfig struct {
 
 type AuthConfig struct {
 	SecretKey string `koanf:"secret_key" validate:"required"`
+	ClerkWebhookSecret  string `koanf:"clerk_webhook_secret" validate:"required"`
 }
 
 type AWSConfig struct {
@@ -76,6 +77,7 @@ type CronConfig struct {
 	ReminderHours               int `koanf:"reminder_hours"`
 	MaxTodosPerUserNotification int `koanf:"max_todos_per_user_notification"`
 }
+
 
 func DefaultCronConfig() *CronConfig {
 	return &CronConfig{
