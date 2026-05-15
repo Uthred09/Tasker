@@ -22,7 +22,7 @@ var migrations embed.FS
 
 func Migrate(ctx context.Context, logger *zerolog.Logger, cfg *config.Config) error {
 	//Build DSN fron config
-	hostPort := net.JoinHostPort(cfg.Database.Host, strconv.Itoa(cfg.Database.Port))
+	hostPort := net.JoinHostPort(cfg.Database.Host, strconv.Itoa(cfg.Database.MigrationPort))
 	encodedPassword := url.QueryEscape(cfg.Database.Password)
 	dsn := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=%s&statement_cache_mode=describe",
 		cfg.Database.User,
