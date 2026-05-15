@@ -40,7 +40,7 @@ func NewJobService(logger *zerolog.Logger, cfg *config.Config) *JobService {
 	server := asynq.NewServer(
 		redisOpt,
 		asynq.Config{
-			Concurrency: 10,
+			Concurrency: 3,
 			Queues: map[string]int{
 				"critical": 6, // Higher priority queue for important emails
 				"default":  3, // Default priority for most emails

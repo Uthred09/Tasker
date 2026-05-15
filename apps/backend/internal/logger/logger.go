@@ -11,6 +11,7 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/pkgerrors"
 	"github.com/uthred09/tasker/internal/config"
+	"github.com/newrelic/go-agent/v3/integrations/logcontext-v2/nrzerolog"
 )
 
 // LoggerService manages New Relic integration and logger creation
@@ -41,9 +42,11 @@ func NewLoggerService(cfg *config.ObservabilityConfig) *LoggerService {
 
 	app, err := newrelic.NewApplication(configOptions...)
 	if err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to initialize New Relic: %v\n", err)
 		return service
 	}
 
+	fmt.Fprintf(os.Stdout, "New Relic agent initialized successfully\n")
 	service.nrApp = app
 	return service
 }
@@ -95,6 +98,7 @@ func NewLoggerWithService(cfg *config.ObservabilityConfig, loggerService *Logger
 		writer = zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: "2006-01-02 15:04:05"}
 	}
 
+	// Build base logger first
 	logger := zerolog.New(writer).
 		Level(logLevel).
 		With().
@@ -103,6 +107,13 @@ func NewLoggerWithService(cfg *config.ObservabilityConfig, loggerService *Logger
 		Str("environment", cfg.Environment).
 		Logger()
 
+	// Then attach New Relic hook if agent is available
+	if loggerService != nil && loggerService.nrApp != nil {
+		nrHook := nrzerolog.NewRelicHook{
+			App: loggerService.nrApp,
+		}
+		logger = logger.Hook(nrHook)
+	}
 	// Include stack traces for errors in development
 	if !cfg.IsProduction() {
 		logger = logger.With().Stack().Logger()
