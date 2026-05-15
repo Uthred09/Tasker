@@ -1,0 +1,9 @@
+{
+  "buildCommand": "bunx turbo run build --filter=@tasker/zod && bunx turbo run build --filter=@tasker/openapi && bunx turbo run build --filter=frontend",
+  "outputDirectory": "apps/frontend/dist",
+  "installCommand": "bun install",
+  "framework": null,
+  "rewrites": [
+  { "source": "/(.*)", "destination": "/index.html" }
+]
+}
