@@ -13,5 +13,5 @@ func registerSystemRoutes(r *echo.Echo, h *handler.Handlers) {
 
 	r.GET("/docs", h.OpenAPI.ServeOpenAPIUI)
 
-	r.POST("/webhook/clerk", h.Webhook.HandleClerkWebhook)
+	r.POST("/webhooks/clerk", h.Webhook.HandleClerkWebhook)
 }
