@@ -46,7 +46,6 @@ type DatabaseConfig struct {
 	MaxIdleConns    int    `koanf:"max_idle_conns" validate:"required"`
 	ConnMaxLifetime int    `koanf:"conn_max_lifetime" validate:"required"`
 	ConnMaxIdleTime int    `koanf:"conn_max_idle_time" validate:"required"`
-	MigrationPort int `koanf:"migration_port" validate:"required"`
 }
 type RedisConfig struct {
 	Address string `koanf:"address" validate:"required"`
